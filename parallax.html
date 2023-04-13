@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<style>
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		font-family: sans-serif;
+	}
+	body {
+		background-color: rgb(102, 189, 16);
+	}
+	.mouse_move {
+		position: relative;
+		width: 100%;
+		height: 100vh;
+		overflow: hidden;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.mouse_move h2 {
+		position: relative;
+		font-size: 100px;
+		color: white;
+	}
+
+	.mouse_move img {
+		position: absolute;
+	}
+	#img1 {
+		top: 80px;
+		left: 80px;
+		height: 250px;
+		width: 250px;
+	}
+	#img2 {
+		bottom: 80px;
+		right: 80px;
+		height: 250px;
+		width: 250px;
+	}
+	</style>
+	<title>Parallax</title>
+</head>
+<body>
+	<div class="mouse_move">
+	<img
+		id="img1"
+		src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20210101144014/gfglogo.png"
+		class="mouse"
+		value="5"/>
+	<h2>GeeksforGeeks</h2>
+	<img
+		id="img2"
+		src=
+"https://media.geeksforgeeks.org/wp-content/cdn-uploads/20190710102234/download3.png"
+		class="mouse"
+		value="-5"/>
+	</div>
+
+	<script type="text/javascript">
+	document.addEventListener("mousemove", parallax);
+	function parallax(event) {
+		this.querySelectorAll(".mouse").forEach((shift) => {
+		const position = shift.getAttribute("value");
+		const x = (window.innerWidth - event.pageX * position) / 90;
+		const y = (window.innerHeight - event.pageY * position) / 90;
+
+		shift.style.transform = `translateX(${x}px) translateY(${y}px)`;
+		});
+	}
+	</script>
+</body>
+</html>

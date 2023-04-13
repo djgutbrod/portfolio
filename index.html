@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'styles.css?_t=' + new Date().getTime();
+        document.head.appendChild(link);
+      </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script type="module">
+        import * as THREE from 'https://cdn.skypack.dev/three@0.129.0/build/three.module.js';
+        import { OrbitControls } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/controls/OrbitControls.js';
+        import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js';
+        
+        let laptop;
+        
+        function init() {
+  const container = document.getElementById('laptop-container');
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+
+  renderer.setSize(container.clientWidth, container.clientHeight);
+  renderer.setPixelRatio(window.devicePixelRatio);
+  container.appendChild(renderer.domElement);
+
+  camera.position.z = 2;
+  camera.position.y = -.1;
+  camera.position.x = 0;
+
+
+
+
+  function onWindowResize() {
+    camera.aspect = container.clientWidth / container.clientHeight / 2;
+    camera.updateProjectionMatrix();
+    renderer.setSize(container.clientWidth, container.clientHeight);
+  }
+
+  window.addEventListener('resize', onWindowResize);
+
+  // Add OrbitControls
+  const controls = new OrbitControls(camera, renderer.domElement);
+  
+
+  const loader = new GLTFLoader();
+    loader.load(
+      'rfox.glb',
+      (gltf) => {
+        laptop = gltf.scene;
+
+        laptop.scale.set(0.5, 0.5, 0.5);
+
+        // Adjust the position of the 3D object
+        // Set the position offset here
+        laptop.position.set(0, 0, 0); // Adjust the x, y, and z values as needed
+        
+        // Rotate the 3D object
+        laptop.rotation.x = Math.PI / 1;
+        laptop.rotation.y = Math.PI / 1;
+        laptop.rotation.z = Math.PI / 1;
+
+
+        scene.add(laptop);
+      },
+    undefined,
+    (error) => console.error('An error occurred while loading the 3D model:', error)
+  );
+
+  const light = new THREE.DirectionalLight(0xffffff, 1.5);
+  light.position.set(0, 0.1, -2).normalize();
+  const light2 = new THREE.DirectionalLight(0xffffff, 1.5);
+  light2.position.set(1, 0, 0.1).normalize();
+  const light3 = new THREE.DirectionalLight(0xffffff, 1);
+  light3.position.set(0, 0, 1).normalize();
+  const light4 = new THREE.DirectionalLight(0xffffff, 1);
+  light4.position.set(0, 1, 0).normalize();
+  scene.add(light);
+  scene.add(light2);
+  scene.add(light3);
+  scene.add(light4);
+
+  function animate() {
+    requestAnimationFrame(animate);
+    renderer.render(scene, camera);
+  }
+
+  animate();
+
+  const mouse = new THREE.Vector2();
+
+    function onMouseMove(event) {
+      // Calculate mouse coordinates in the range of -1 to 1
+      mouse.x = (event.clientX / window.innerWidth) * .5;
+      mouse.y = 1 //-(event.clientY / window.innerHeight) * 1;
+
+      if (laptop) {
+        laptop.rotation.x = .75 * mouse.x  * Math.PI;
+        laptop.rotation.y = .5 * -mouse.y * Math.PI;
+      }
+    }
+
+    document.addEventListener('mousemove', (event) => {
+  const clientX = event.clientX;
+  const clientY = event.clientY;
+  
+  const offsetX = (clientX / window.innerWidth) * 1;
+  const offsetY = (clientY / window.innerHeight) * 2.5;
+  
+  const rotationX = offsetY * Math.PI / 1; 
+  const rotationY = offsetX * Math.PI / 1; 
+  
+  if (laptop) {
+    laptop.rotation.x = Math.min(Math.max(rotationX, -Math.PI / 1.1 + 5.7), Math.PI / 1);
+    laptop.rotation.y = 2 * Math.min(Math.max(rotationY, -Math.PI / 1), Math.PI / 1);
+    laptop.rotation.z = Math.min(Math.max(rotationY, -Math.PI / -.5), Math.PI / 1);
+  }
+});
+  
+
+}
+
+document.addEventListener('DOMContentLoaded', init);
+        </script>
+
+
+      
+<section id="top"></section>
+  <link rel="stylesheet" href="styles.css">
+  <title>Dante Gutbrod Portfolio</title>
+</head>
+
+<body>
+
+  
+
+  <header>
+    
+    <h1>Dante Gutbrod is a UI/UX Designer with a focus on educational technologies and cognitive research.</h1>
+  </header>
+  <div id="spacer">
+    <h2><span style="color: #eeeded;">Welcome!  </span>You can use the arrows to navigate this portfolio.</h2> </div>
+  <div id="laptop-container"></div>
+  <div class="w3-container">
+  <h2>I want to curate amazing digital experiences that help people learn and grow.</p>
+    
+    
+</div>
+  <div class="mouse_move">
+    <img
+      id="img1"
+      src=
+"process/2.PNG"
+      class="mouse"
+      value="2.5"/>
+    
+    <img
+      id="img2"
+      src=
+      "process/1.PNG"
+      class="mouse"
+      value="-5"/>
+
+      <img
+      id="img3"
+      src=
+      "process/8.PNG"
+      class="mouse"
+      value="-10"/>
+
+      <img
+      id="img4"
+      src=
+      "process/3.PNG"
+      class="mouse"
+      value="10"/>
+      <img
+      id="img6"
+      src=
+      "process/4.PNG"
+      class="mouse"
+      value="-4.5"/>
+
+      <img
+      id="img5"
+      src=
+      "process/6.PNG"
+      class="mouse"
+      value="2.5"/>
+
+<script src="scripts.js"></script>
+      <button id="scroll-btn"><img id="arrow" src="process/arrow.svg"></button>
+    
+      <!-- Your other content -->
+      
+      <div id="targetElement">
+          <!-- Your target content -->
+      </div>
+      
+      
+  </div>
+
+  <script type="text/javascript">
+    document.addEventListener("mousemove", parallax);
+    function parallax(event) {
+      this.querySelectorAll(".mouse").forEach((shift) => {
+        const position = shift.getAttribute("value");
+        const x = (window.innerWidth - event.pageX * position) / 90;
+        const y = (window.innerHeight - event.pageY * position) / 90;
+
+        shift.style.transform = `translateX(${x}px) translateY(${y}px)`;
+      });
+    }
+  </script>
+ 
+
+  <nav>
+    <a href="game/index.html" class="rounded-button">Game</a>
+    <a href="about.html" class="rounded-button">About</a>
+    <a href="parallax.html" class="rounded-button">Parallax Test</a>
+
+    <script src="scripts2.js"></script>
+      <button id="scroll-btn2"><img id="arrow" src="process/arrow.svg"></button>
+    
+      <!-- Your other content -->
+      
+      <div id="targetElement2">
+          <!-- Your target content -->
+      </div>
+     
+  </nav>
+ 
+
+    <section id="projects">
+        <h4>Projects</h4>
+
+        <div class="carousel">
+            <div class="slide">
+                <div><img src="matdemo.gif" alt="Image 3"></div>
+                <h3>BTSNE M.A.T. Time</h3>
+                <p>Beat the Streets New England is a sports-based youth development nonprofit that is quickly growing in reach throughout the region, and needed an effective way to teach the core skills and values needed in the organization to all of the new employees, volunteers, and board members that join BTSNE as it grows. To satisfy this need, I designed the visuals, animation, content, and experience for M.A.T. Time, a short onboarding course that provides the materials needed to succeed in the organization.</p>
+                 </div>
+            <div class="slide">
+                <img src="Car1.png" alt="Image 1">
+                <h3>NewCo Oncology Database</h3>
+                <p>Founded by a pair of PhD Graduates from MIT and a design consultant and teacher at Williams College, NewCo is a startup that offered a solution for oncologists to have access to a more complete database of cancer cases that could easily be reviewed, discussed and updated. My task was to solve the problem of creating an interface that would be easy and intuitive, without imposing unnecessary structure on busy professional oncologists.</p>
+                  </div>
+            <div class="slide">
+                <div><img src="Cat3.png" alt="Image 2"></div>
+                <h3>ThinkCERCA</h3>
+                <p>ThinkCERCA is an industry leader in the K-12 EdTech space. Based out of Chicago, ThinkCERCA provides a tool used for teaching reading, writing, and literacy in several school districts around the country. The platform was struggling to see user engagement with the student-side and admin dashboards, so I undertook the task of redesigning the visuals and experience of each. I began with market research of dashboards within the EdTech industry, and used my findings to inform the structure of my design. My designs are currently set to be tested with customers to gain further insights on the experience of the platform.</p>
+                  </div>
+            
+            <!-- Add more slides as needed -->
+          </div>
+
+          <script src="scripts3.js"></script>
+          <button id="scroll-btn3"><img id="arrow" src="process/arrow.svg"></button>
+        
+          <!-- Your other content -->
+          
+          <div id="targetElement3">
+              <!-- Your target content -->
+          </div>
+      
+</section>
+
+
+
+
+<section id="tools">
+    <img id="grid" src="process/toolbox.svg">
+        <h5>Tools I Use</h5>
+        <p>Figma</p>
+        <p>HTML</p>
+        <p>CSS</p>
+        <p>Javascript</p>
+        <p>Blender</p>
+        <p>Photoshop</p>
+        <p>Illustrator</p>
+        <p>Midjourney</p>
+        <p>GPT-4</p>
+        <p>Wordpress</p>
+        <p>Webflow</p>
+        
+</section>
+<script src="scripts4.js"></script>
+          <button id="scroll-btn4"><img id="arrow" src="process/arrow.svg"></button>
+        
+          <!-- Your other content -->
+          
+          <div id="targetElement4">
+              <!-- Your target content -->
+          </div>
+
+
+
+
+      
+
+
+
+
+<section id="about">
+        <h4>About Me</h4> 
+    <p>Hello! Thanks for stopping by.
+
+        Welcome to my Portfolio. 
+        
+        My name is Dante. I'm currently studying philosophy and cognitive science at Williams College, along with UI, UX and Interaction Design. I've had a somewhat nontraditional journey into the field of design over the past few years. 
+        
+         I have always been fascinated by human decision making, the natural world, and the ways that the smallest of details can influence a person's thoughts and actions. On top of that, I grew up as a kid of the digital world. Figuring out to solve everyday problems around my house with software, connecting with my friends online, and constantly learning about the world led me to spend a lot of time with digital interfaces, like many in my generation.  
+        
+        Now, I am spending my off time trying to learn every industry skill I can, as I explore potential opportunities going forward. My experience as a college athlete has taught me commitment and focus that I am eager to channel into my career as I develop day after day. I am looking to take on adventurous new projects, learn from excellent mentors, and create the best interactive products I can.</p>
+        <img id="me" src="process/me.png">
+    
+        <section id="contact">
+        
+    
+
+<script src="scripts5.js"></script>
+          <button id="scroll-btn5"><img id="arrow" src="process/arrow.svg"></button>
+        
+          <!-- Your other content -->
+          
+          <div id="targetElement5">
+              <!-- Your target content -->
+          </div>
+ 
+<h4>Contact</h4>
+        <p>Email: <a href="mailto:djg3@williams.edu">djg3@williams.edu</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/dantegutbrod/" target="_blank">linkedin.com/in/dantegutbrod</a></p>
+      </section>
+       
+      
+       <section id="buttons2">
+       <a href="game/index.html" class="rounded-button2">Game</a>
+    <a href="about.html" class="rounded-button2">About</a>
+    <a href="parallax.html" class="rounded-button2">Parallax Test</a>
+  </section>
+    <script src="scripts6.js"></script>
+          <button id="scroll-btn6"><img id="arrow" src="process/arrow.svg"></button>
+        
+          <!-- Your other content -->
+          
+          <div id="targetElement6">
+              <!-- Your target content -->
+          </div>
+
+             
+
+</section>
+<section id="prototypes">
+
+    <div class="iframe-container" style="padding-top: 200px;">
+        <iframe id="roast" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2F9e3XF2zBPoH6iXXFbMKCIG%2FTogether-Roasters-Mobile-UI%3Fpage-id%3D2002%253A343%26node-id%3D2040-4697%26viewport%3D632%252C422%252C0.1%26scaling%3Dcontain%26starting-point-node-id%3D2040%253A4782" allowfullscreen></iframe>
+        <div class="roastcopy"><h6>Here's a prototype I made for a local coffee roaster,</h6><h6 style= "color: rgb(155, 62, 0);">Together Roasters.</h6><a href="togetherroasters.html" style="white-space: nowrap;">You can learn more about my design process here.</a>
+            <p style="font-style: italic; text-decoration: none; line-height: 420%; white-space: nowrap;">(You can interact with these prototypes. Fullscreen them, if needed!)</p>
+       
+
+        <script src="scripts7.js" style="position: absolute;"></script>
+        <button id="scroll-btn7"><img id="arrow" src="process/arrow.svg"></button>
+      
+        <!-- Your other content -->
+        
+        <div id="targetElement7">
+            <!-- Your target content -->
+      </div>
+
+ </div>
+    
+      </div> 
+      
+      
+
+ <div class="iframe-container" id="thinkcerca" style="padding-top: 150px;">
+        <iframe id="cerca" style= "height: 800px" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2Fk6cJXbHshkSK8dYSdJUkHN%2FAdmin-Facing-Dashboard-Concept---ThinkCERCA%3Fpage-id%3D24%253A425%26node-id%3D24-1619%26starting-point-node-id%3D24%253A670%26scaling%3Dscale-down" allowfullscreen></iframe>
+        <div class="cercacopy"><h6>Here's a dashboard I designed for an educational platform,</h6><h6 style= "color: rgb(0, 183, 255);">ThinkCERCA.</h6><a href="cerca.html" style="white-space: nowrap;">You can learn more about my design process here.</a>
+
+      <script src="scripts8.js" style="position: absolute; top: -800;"></script>
+      <button id="scroll-btn8"><img id="arrow" src="process/arrow.svg"></button>
+    
+      <!-- Your other content -->
+      
+      <div id="targetElement8">
+          <!-- Your target content -->
+      </div>
+            </div>
+      </div> 
+
+
+      <div class="iframe-container" id="newco1" style="padding-top: 150px;">
+        <img title="mockup1" src="mockup1.png" style="width: 400px; height: 400; padding-right: 50;">
+        <div class="newcocopy"><h6>Here's a mockup I designed for a healthcare platform,</h6><h6 style= "color: rgb(172, 0, 51);">NewCo.</h6><a style="line-height: 1.3;"">This project is still underway. </a><a href="newco.html" style="line-height: 1.3px; white-space: nowrap;">You can learn more about my design process here.</a>
+           
+</div></div> 
+      <script src="scripts9.js" style="position: absolute; top: -1200px; left: 200px;"></script>
+      <button id="scroll-btn9"><img id="arrow" src="process/arrow.svg"></button>
+     
+      
+      <!-- Your other content -->
+      
+      <div id="targetElement9">
+          <!-- Your target content -->
+      </div>
+    
+    
+    
+    </div>
+
+
+
+
+<section id="skills">
+<h2 style="color: rgb(63, 63, 63); font-size: 4rem; line-height: 190%;">Some of the things I can do:</H2>
+
+
+<h2 style="color: rgb(88, 88, 88);line-height: 140%;">Color, Typography & Iconography</h2>    
+<h2 style="color: rgb(88, 88, 88);line-height: 140%;">Wireframing & Prototyping</h2>
+<h2 style="color: rgb(88, 88, 88);line-height: 140%;">Interactions & Animations</h2>
+<h2 style="color: rgb(88, 88, 88);line-height: 140%;">Personas & Storyboarding</h2>
+<h2 style="color: rgb(88, 88, 88);line-height: 140%;">High-Fidelity Mockups</h2>
+<h2 style="color: rgb(88, 88, 88);line-height: 140%;">Graphic Design</h2>
+<h2 style="color: rgb(88, 88, 88);line-height: 140%;">3D Modelling</h2>
+<h2 style="color: rgb(88, 88, 88);line-height: 140%;">Sketching</h2>
+<h2 style="color: rgb(88, 88, 88);line-height: 140%;">Qualitative and Quantitative User Research</h2>
+<h2 style="color: rgb(88, 88, 88);line-height: 140%;">Frontend Coding</h2>
+
+<script src="scripts10.js" style="position: relative; top: -800;"></script>
+      <button id="scroll-btn10"><img id="arrow" src="process/arrow.svg"></button>
+     </div>
+      </div> 
+      <!-- Your other content -->
+      
+      <div id="targetElement10">
+          <!-- Your target content -->
+      </div>
+
+
+   </section>
+
+
+
+<section id="endPage"><h2 style="color: rgb(88, 88, 88);line-height: 1500%; white-space: nowrap;">I would love to help you with your next project. Feel free to contact me!</h2>
+
+
+
+</section>
+
+<section id="lastButton">
+
+<script src="scripts11.js" style="position: relative; top: -800; left: 600px;"></script>
+      <button id="scroll-btn11"><img id="arrow" src="process/arrow2.svg"></button>
+     </div>
+      </div> 
+      <!-- Your other content -->
+      
+      <div id="targetElement11">
+          <!-- Your target content -->
+      </div>
+
+</section>
+<div style="width: 400x; height: 200px; overflow: hidden"></div>
+  <script>
+    $(document).ready(function(){
+      $('.carousel').slick({
+        dots: true,
+        infinite: true,
+        speed: 500,
+        autoplay: false,
+        autoplaySpeed: 5000,
+        slidesToShow: 1,
+        adaptiveHeight: true,
+      });
+    });
+  </script>
+  
+</body>
+</html>
